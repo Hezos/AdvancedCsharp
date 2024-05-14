@@ -1,0 +1,651 @@
+﻿@page "/"
+
+<div width="100%" height="100%" style="background-color:black; overflow-x:scroll; overflow:hidden">
+    <div style="width:1000px">
+        <div style="width:50%">
+            <h1 style="color:blue"> Main calculations go here </h1>
+        </div>
+        <div style ="display:flex; flex-direction:column; text-align:center">
+            <div style="display:flex; flex-direction:row; width:80%; text-align:center">
+                <div style="display:flex; flex-direction:column; width:18%; text-align:center">
+                    <h4 style="color:blue"> Set cut mode: </h4>
+                    <InputNumber @bind-Value="@mode" />
+                </div>
+                <div style="display:flex; flex-direction:column; width:18%; text-align:center ">
+                    <h4 style="color:blue">Set number of jobs:</h4>
+                    <InputNumber @bind-Value="@NJ" />
+                </div>
+                <div style="display:flex; flex-direction:column; width:18%; text-align:center">
+                    <h4 style="color:blue">Set number of resources:</h4>
+                    <InputNumber @bind-Value="@NR" />
+                </div>
+                <div style="display:flex; flex-direction:column; width:18%; text-align:center">
+                    <h4 style="color:blue">Set number of steps:</h4>
+                    <InputNumber @bind-Value="@STEP" />
+                </div>
+                <div style="display:flex; flex-direction:column; width:18%; text-align:center">
+                    <h4 style="color:blue">Set number of loops:</h4>
+                    <InputNumber @bind-Value="@LOOP" />
+                </div>
+            </div style="width:80%; display: flex; justify-content: center; align-items: center;">
+            <button class="btn btn-primary" style="width:20%" @onclick="() => { SetInfo(); }"> Generate random data </button>
+        </div>
+    </div>
+    
+    <div width=1000px style=" overflow-x:auto;">
+        <div width="100%" height="100%">
+                    @if (DrawSolution)
+            {
+    
+            <!-- Requires a buttonpress to fill the list -->
+            <p></p>
+                <svg width="@DataToString( (Jobs[Jobs.Count - 1].EndT[Jobs[Jobs.Count - 1].EndT.Count - 1])*1.05 )"
+                height="@DataToString(Jobs.Count*45)">
+                    @for (int i = 0; i < Jobs.Count; i++)
+                    {
+                        for (int j = 0; j < Jobs[i].StartT.Count; j++)
+                        {
+                            <rect fill="yellow" x=@DataToString(Jobs[i].StartT[j] + 25)
+                                  y=@DataToString(i * 35) width=@DataToString(Jobs[i].ProcT[j]) height="30" stroke="cyan" stroke-width="2" />
+                        }
+                        
+                        <svg>
+                            <text x="5" y=@DataToString((i+1) * 35) fill="blue"> @DataToString(i+1) </text>
+                        </svg>    
+                    }
+                    <svg>
+                        <line x1="23" y1=@DataToString((Jobs.Count+0.5) * 35) x2="23" y2=20 fill="blue" stroke-width="2" stroke="blue" />
+                    </svg>
+                  @for (int l = 0; l < @Jobs[Jobs.Count - 2].EndT[Jobs[Jobs.Count - 2].EndT.Count - 1]; l++)
+                   {
+                        if (l % 10 == 0)
+                        {
+                               <svg>
+                                    <text x=@DataToString(l*10 + 23) y=@DataToString(21.3 * 35) fill="blue"> @l  </text>
+                               </svg>   
+                        }  
+                     }
+                     <svg>
+                        <line x1="21" y1=@DataToString((Jobs.Count+0.5) * 35) x2=@DataToString(Jobs[Jobs.Count-1].StartT[Jobs[Jobs.Count-1].StartT.Count-1] + 12)
+                        y2=@DataToString((Jobs.Count+0.5) * 35) fill="blue" stroke-width="2" stroke="blue" />
+                    </svg>
+                </svg>
+                }
+        </div>
+    </div>
+    
+
+</div>
+
+
+@code {
+
+
+    public List<T_JOB> Jobs = new List<T_JOB>();
+    public List<T_RES> Res = new List<T_RES>();
+
+    public string DataToString(long data)
+    {
+        return $"{data}";
+    }
+
+    public string DataToString(double data)
+    {
+        return $"{data}";
+    }
+
+
+    public string DataToString(int data)
+    {
+        return $"{data}";
+    }
+
+    public int NJ = 0;
+    public int NR = 0;
+    public int LOOP = 0;
+    public int STEP = 0;
+    public int mode = 1;
+    public int K = 0;
+
+
+    public List<T_RES> create_res_data(int NJ, int NR)
+    {
+        Random rnd = new Random();
+        int r, k;
+        int i, j;
+        List<T_RES> temp = new List<T_RES>();
+        for (int l = 0; l < NR; l++)
+        {
+            temp.Add(new T_RES());
+        }
+        for (r = 0; r < NR; r++)
+        {
+            for (k = 0; k < NR; k++)
+                if (k == r)
+                    temp[r].TransT.Add(0);
+                else
+                    temp[r].TransT.Add(rnd.Next(0, 21));
+
+            temp[r].SetT = new List<List<long>>();
+            for (i = 0; i < NJ; i++)
+            {
+                temp[r].SetT.Add(new List<long>());
+                for (j = 0; j < NJ; j++)
+                    if (i == j)
+                        temp[r].SetT[i].Add(0);
+                    else
+                        temp[r].SetT[i].Add(rnd.Next(0, 41));
+            }
+
+            temp[r].Last_Job = rnd.Next(0, NJ);
+            temp[r].First_SetT = rnd.Next(20, 52);
+
+            //Calendar
+            int NCal = rnd.Next(2, 9);
+            temp[r].Cal = new List<T_TW>();
+            for (int l = 0; l < NCal; l++)
+            {
+                temp[r].Cal.Add(new T_TW());
+            }
+            //j. time interval
+            for (j = 0; j < NCal; j++)
+            {
+                if (j == 0)
+                    temp[r].Cal[j].ST = rnd.Next(0, 40);
+                else
+                    temp[r].Cal[j].ST = temp[r].Cal[j - 1].ET + rnd.Next(0, 40);
+
+                temp[r].Cal[j].ET = temp[r].Cal[j].ST + rnd.Next(0, 50);
+            }
+
+        }
+
+        return temp;
+    }
+
+    public List<T_JOB> create_job_data(int NJ, int NR)
+    {
+        Random rnd = new Random();
+        List<T_JOB> job;
+        int i;
+        int r;
+        job = new List<T_JOB>();
+        for (int k = 0; k < NJ; k++)
+        {
+            job.Add(new T_JOB());
+        }
+        foreach (T_JOB item in job)
+        {
+            for (int k = 0; k < NR; k++)
+            {
+                item.StartT.Add(0);
+                item.EndT.Add(0);
+            }
+        }
+        for (i = 0; i < NJ; i++)
+        {
+            job[i].DueDate = NR * (rnd.Next(50, 101));
+            for (r = 0; r < NR; r++)
+            {
+                job[i].ProcT.Add(rnd.Next(1, 101));
+            }
+        }
+
+        return job;
+    }
+    public List<int> s = new List<int>();
+
+    public bool DrawSolution = false;
+
+    public string InfoString = "Info goes here.";
+    public void SetInfo()
+    {
+        Jobs = create_job_data(NJ,NR);
+        Res = create_res_data(NJ, NR);
+        s = create_ad_hoc_seq(NJ);
+
+        List<double> W = new List<double>();
+        for (int i = 1; i < 5; i++)
+        {
+            W.Add(i);
+        }
+        K = 4;
+        Jobs = Simulate_FS(Jobs, NJ, NR, s, 0);
+        Search_alg_MO(ref Jobs, NJ, Res, NR,ref s,LOOP, STEP,mode,ref W, K);
+        Simulate_FS_with_Log(ref Jobs, NJ, ref Res, NR, ref s, 0, mode);
+        InfoString = "Button works";
+        DrawSolution = true;
+    }
+    public string selectedString = "";
+    public List<string> searchoptions = new List<string>()
+    {
+        "Cmax", "Lmax", "Tmax", "Usum"
+    };
+
+    public class T_JOB
+    {
+        public List<long> StartT;
+        public List<long> EndT;
+        public List<long> ProcT;
+        public long DueDate;
+        public T_JOB()
+        {
+            StartT = new List<long>();
+            EndT = new List<long>();
+            ProcT = new List<long>();
+        }
+    }
+
+    //Time Window
+    public class T_TW
+    {
+        public long ST; //Start time
+        public long ET; //End time
+    }
+
+    public class T_RES
+    {
+        public List<long> TransT; //Material transportation time
+        public List<List<long>> SetT; //Setup time
+        public int Last_Job; //Last manufactured job
+        public long First_SetT; //Default setup time
+        public List<T_TW> Cal; //Calendar
+        public T_RES()
+        {
+            TransT = new List<long>();
+            SetT = new List<List<long>>();
+            Cal = new List<T_TW>(); //Intervalls
+        }
+    }
+    public class Job
+    {
+        public int id;
+        public List<double> StartT = new List<double>();
+        public List<double> EndT = new List<double>();
+        public List<double> ProcT = new List<double>();
+    }
+
+    private int currentCount = 0;
+
+
+
+    public List<T_JOB> Simulate_FS(List<T_JOB> job, int NJ, int NR, List<int> s, int v)
+    {
+
+        int i;  //starting queue
+        int r;  //machine schedule based on technical path
+
+        for (i = 0; i < NJ; i++)
+        {
+            for (r = 0; r < NR; r++)
+            {
+
+                if (i == 0)
+                {
+                    if (r == 0) //Starting machine
+                        job[s[i]].StartT[r] = 0;  //First machine to start
+                    else
+                        job[s[i]].StartT[r] = job[s[i]].EndT[r - 1];  //Arriving from the previous machine
+
+                }
+                else
+                {
+                    if (r == 0)
+                        job[s[i]].StartT[r] = job[s[i - 1]].EndT[r]; //Waits for the previous machine
+                    else
+                        job[s[i]].StartT[r] = Math.Max(job[s[i]].EndT[r - 1],     //arrival time
+                            job[s[i - 1]].EndT[r]);   //machine freeing time
+                }
+                //End = start + production time
+                job[s[i]].EndT[r] = job[s[i]].StartT[r] + job[s[i]].ProcT[r];
+
+            }
+        }
+        return job;
+    }
+
+    public void Search_alg_MO(ref List<T_JOB> job, int NJ, List<T_RES> res, int NR, ref List<int> s, int LOOP, int STEP, int mode, ref List<double> w, int k)
+    {
+
+        int step;
+        int loop;
+
+        List<int> s_0;     //Base
+        List<int> s_act;   //Neighbour
+        List<int> s_ext;   //Best neighbour
+        List<int> s_best;  //Found best solution
+
+        List<double> f_act;
+        List<double> f_ext;
+        List<double> f_best;
+
+        s_ext = new List<int>();
+        s_act = new List<int>();
+        s_0 = new List<int>();
+        s_best = new List<int>();
+        for (int i = 0; i < NJ; i++)
+        {
+            s_0.Add(0);
+            s_best.Add(0);
+            s_act.Add(0);
+            s_ext.Add(0);
+        }
+
+        f_act = new List<double>();
+        f_ext = new List<double>();
+        f_best = new List<double>();
+        for (int i = 0; i < k; i++)
+        {
+            f_act.Add(0);
+            s_ext.Add(0);
+            f_best.Add(0);
+        }
+
+        //elokeszites
+        s_0 = s;
+        s_best = s;
+        Simulate_FS_with_Log(ref job, NJ, ref res, NR, ref s_best, 0, mode); //Simulation for all machines
+        Evaluate_MO(ref job, NJ, NR, ref s_best, ref f_best);
+
+        for (step = 0; step < STEP; step++)
+        {
+
+            for (loop = 0; loop < LOOP; loop++)
+            {
+                //Generate neighbour
+                Neighbour(ref s_0, ref s_act, NJ);
+                Simulate_FS_with_Log(ref job, NJ, ref res, NR, ref s_act, 0, mode);
+                Evaluate_MO(ref job, NJ, NR, ref s_act, ref f_act);
+
+                if (loop == 0)
+                {
+                    s_ext = s_act;
+                    f_ext = f_act;
+                }
+                else
+                {
+                    //Handling function priority
+                    if (F(f_ext, f_act, w, k) < 0)
+                    {
+                        s_ext = s_act;
+                        f_ext = f_act;
+                    }
+                }
+            } //loop
+
+            //Accepted best neighbour
+            s_0 = s_ext;
+
+            //Keeping the best neighbour
+            if (F(f_best, f_ext, w, k) < 0)
+            {
+                s_best = s_ext;
+                f_best = f_ext;
+            }
+
+        } //step
+
+    }
+
+    public double F(List<double> fx, List<double> fy, List<double> w, int K)
+    {
+
+        double rv = 0;
+        double a, b, D;
+        int k;
+
+        for (k = 0; k < K; k++)
+        {
+            a = fx[k];
+            b = fy[k];
+            if (Math.Max(a, b) != 0)
+                D = (b - a) / Math.Max(a, b);
+            else
+                D = 0;
+
+            rv += w[k] * D;
+        }
+
+        return rv;
+    }
+
+    public void Neighbour(ref List<int> s_0, ref List<int> s_act, int NJ)
+    {
+        Random rnd = new Random();
+        int x;
+
+        s_act = s_0;
+
+        x = rnd.Next(1, NJ);
+
+        if (x > 0)
+        {
+            s_act[x] = s_0[x - 1];
+            s_act[x - 1] = s_0[x];
+        }
+        else
+        {  //Start finish switch
+            s_act[x] = s_0[NJ - 1];
+            s_act[NJ - 1] = s_0[x];
+
+        }
+    }
+
+    public void Evaluate_MO(ref List<T_JOB> job, int NJ, int NR, ref List<int> s, ref List<double> f)
+    {
+        //overtake void Flow Shop reading the Cmax value!
+        long L;
+        long Tsum = 0;  //Tardiness sum
+        long Tmax = 0;  //max tardiness
+        int Usum = 0;   //count of late works
+
+        int i;
+
+        for (i = 0; i < NJ; i++)
+        {
+            L = job[i].EndT[NR - 1] - job[i].DueDate; /* Ci - di */
+            //if the is lateness
+            if (L > 0)
+            {
+                Tsum += L;
+                //We get the maximum lateness
+                if (L > Tmax)
+                    Tmax = L;
+                Usum++;
+            }
+        }
+        //Cmax value is displayed here
+        //Index out of range exception
+        f[0] = job[s[NJ - 1]].EndT[NR - 1];
+        f[1] = Tmax;
+        f[2] = Tsum;
+        f[3] = Usum;
+    }
+
+
+    public List<int> create_ad_hoc_seq(int NJ)
+    {
+        List<int> s = new List<int>();
+        int i;
+
+        for (i = 0; i < NJ; i++)
+            s.Add(i);
+        return s;
+    }
+
+    public void Simulate_FS_with_Log(ref List<T_JOB> job, int NJ, ref List<T_RES> res, int NR, ref List<int> s, long t_ref, int mode)
+    {
+
+        int i;  //Starting schedule
+        int r;  //machine schedule on the technical way
+        long sett; //setup time
+
+        for (i = 0; i < NJ; i++)
+        {
+            for (r = 0; r < NR; r++)
+            {
+                if (i == 0)
+                {
+                    if (r == 0) //First job on the first machine
+                        job[s[i]].StartT[r] = 0;  //start time at the beginning
+                    else
+                        //Waits for the previous to finish
+                        job[s[i]].StartT[r] = job[s[i]].EndT[r - 1] + res[r].TransT[r - 1];  //arriving, Transport time
+                    if (res[r].Last_Job < 0)
+                        //Making negative last job time default
+                        sett = res[r].First_SetT;
+                    else
+                        //Calculating the last job's finish time to the setup time
+                        sett = res[r].SetT[res[r].Last_Job][s[i]];
+
+                }
+                else
+                {
+                    if (r == 0)
+                        job[s[i]].StartT[r] = job[s[i - 1]].EndT[r]; //Waiting for the previous work to finish
+
+                    else
+                        //Witch one is bigger the previous Endtime with transportation or the actual endtime?
+                        job[s[i]].StartT[r] = Math.Max(job[s[i]].EndT[r - 1] + +res[r].TransT[r - 1],     //arrival time
+                            job[s[i - 1]].EndT[r]);   //machine freeing time
+                                                      //Transport time
+                    sett = res[r].SetT[s[i - 1]][s[i]];
+                }
+
+                //end = start + transport + process time
+                job[s[i]].EndT[r] = job[s[i]].StartT[r] + sett + job[s[i]].ProcT[r];
+
+                //limited time interval insertion
+                Load_STET_to_Cal_by_user_mod(job[s[i]].StartT[r], job[s[i]].EndT[r], res, r, mode);
+
+            }
+        }
+    }
+
+    public int Load_STET_to_Cal_by_user_mod(long st, long et, List<T_RES> res, int r, int mode)
+    {
+        if (mode == 0)
+            return Load_STET_to_Cal(ref st, ref et, res, r);
+        else
+            return Load_STET_to_Cal_with_cut(ref st, ref et, res, r);
+
+    }
+
+    public int Load_STET_to_Cal_with_cut(ref long st, ref long et, List<T_RES> res, int r)
+    {
+
+        int found;  //selected shift
+        long new_st, new_et;
+        long size;  //load size
+        int c;      //shift index
+        long fps = -1; //First resource start
+
+        new_st = st;
+        new_et = et;
+        size = new_et - new_st;
+
+        //searching the acceptable shift
+        c = 0;
+        found = -1;
+
+        while (c < res[r].Cal.Count)
+        {
+            if (new_st < res[r].Cal[c].ET)
+            { //Candidate
+                //Can arrive in the breaks, in that case take that into the beginning of the shift
+                new_st = Math.Max(new_st, res[r].Cal[c].ST);
+                new_et = new_st + size;
+
+
+                if (fps == -1)
+                {
+                    //Getting the highest value calendar end time
+                    fps = new_st;
+                    found = c;
+                }
+
+
+                if (new_et <= res[r].Cal[c].ET) //accepted
+                {
+                    break;
+                }
+                else
+                {
+                    c++;
+                    // End of the elements in Cal
+                    if (c >= res[r].Cal.Count)
+                    { //No more candidates
+                        break;
+                    }
+                    //Making the size smaller, because the production stopped somewhere
+                    size -= res[r].Cal[c - 1].ET - new_st;
+                    continue; //avoiding stepping twice
+                }
+            }
+            c++;  //next shift
+        }
+
+        if (fps == -1)
+            st = new_st;
+        else
+            st = fps;  //remembered start
+
+        et = new_et;
+
+
+        return found;
+    }
+
+    public int Load_STET_to_Cal(ref long st, ref long et, List<T_RES> res, int r)
+    {
+        int found;  //choosen shift's index
+        long new_st, new_et;
+        long size;  //load size
+        int c;      //shift index
+
+        new_st = st;
+        new_et = et;
+        size = new_et - new_st;
+
+        //searching for the best shift index
+        c = 0;
+        found = -1;
+
+        while (c < res[r].Cal.Count)
+        {
+            //if the new candidate is better the the selected
+            if (new_st < res[r].Cal[c].ET)
+            { //candidate
+                //Can arrive in the breaks, in that case take that into the beginning of the shift
+                new_st = Math.Max(new_st, res[r].Cal[c].ST);
+                new_et = new_st + size;
+
+                //Getting the highest calendar endtime
+                if (new_et <= res[r].Cal[c].ET) //accepted
+                {
+                    found = c;
+                    break;
+                }
+                else
+                {
+                    c++;
+                    // End of the elements in Cal
+                    if (c >= res[r].Cal.Count)
+                    { //No more candidates
+                        new_st = res[r].Cal[c - 1].ET; //Streching begins from the last element
+                        new_et = new_st + size;
+                        break;
+                    }
+                    continue; //avoiding stepping twice
+                }
+            }
+            c++;  //next shift
+        }
+
+        st = new_st;
+        et = new_et;
+
+        return found;
+    }
+
+}

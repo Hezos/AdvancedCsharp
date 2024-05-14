@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\AdvancedCsharp.styles.css",
+      "PackagePath": "staticwebassets\\AdvancedCsharp.styles.css"
+    },
+    {
+      "Id": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.AdvancedCsharp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.build.AdvancedCsharp.props",
+      "PackagePath": "build\\AdvancedCsharp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.buildMultiTargeting.AdvancedCsharp.props",
+      "PackagePath": "buildMultiTargeting\\AdvancedCsharp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.buildTransitive.AdvancedCsharp.props",
+      "PackagePath": "buildTransitive\\AdvancedCsharp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

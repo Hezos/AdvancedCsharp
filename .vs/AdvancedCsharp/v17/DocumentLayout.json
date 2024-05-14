@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Jegyzetek\\AdvancedCsharp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|d:\\jegyzetek\\advancedcsharp\\advancedcsharp\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|solutionrelative:advancedcsharp\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|d:\\jegyzetek\\advancedcsharp\\advancedcsharp\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|solutionrelative:advancedcsharp\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|d:\\jegyzetek\\advancedcsharp\\advancedcsharp\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|solutionrelative:advancedcsharp\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|d:\\jegyzetek\\advancedcsharp\\advancedcsharp\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|solutionrelative:advancedcsharp\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|d:\\jegyzetek\\advancedcsharp\\advancedcsharp\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB5E0D34-F8D0-4071-B865-9ECCA22A672B}|AdvancedCsharp\\AdvancedCsharp.csproj|solutionrelative:advancedcsharp\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{bdb66994-1ae7-31f2-baea-81e782782493}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\Components\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "AdvancedCsharp\\Components\\Layout\\NavMenu.razor",
+              "ToolTip": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\Components\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "AdvancedCsharp\\Components\\Layout\\NavMenu.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T08:08:10.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "AdvancedCsharp\\Components\\Layout\\MainLayout.razor",
+              "ToolTip": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "AdvancedCsharp\\Components\\Layout\\MainLayout.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T08:05:32.376Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Routes.razor",
+              "DocumentMoniker": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\Components\\Routes.razor",
+              "RelativeDocumentMoniker": "AdvancedCsharp\\Components\\Routes.razor",
+              "ToolTip": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\Components\\Routes.razor",
+              "RelativeToolTip": "AdvancedCsharp\\Components\\Routes.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T08:04:05.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "index.html",
+              "DocumentMoniker": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "AdvancedCsharp\\wwwroot\\index.html",
+              "ToolTip": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\wwwroot\\index.html",
+              "RelativeToolTip": "AdvancedCsharp\\wwwroot\\index.html",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAqwBoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-05-02T08:04:15.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Home.razor",
+              "DocumentMoniker": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "AdvancedCsharp\\Components\\Pages\\Home.razor",
+              "ToolTip": "D:\\Jegyzetek\\AdvancedCsharp\\AdvancedCsharp\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "AdvancedCsharp\\Components\\Pages\\Home.razor",
+              "ViewState": "AQIAADYAAAAAAAAAAAAiwEIAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T08:02:14.132Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
